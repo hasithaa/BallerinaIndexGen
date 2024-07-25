@@ -8,3 +8,8 @@ build
 .vscode
 
 */bin
+
+sources
+lib
+
+target

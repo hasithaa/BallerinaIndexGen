@@ -29,10 +29,17 @@ import io.ballerina.compiler.api.symbols.SymbolKind;
 import io.ballerina.projects.ModuleId;
 import io.ballerina.projects.Package;
 import io.ballerina.projects.PackageCompilation;
+import io.ballerina.projects.Project;
 import io.ballerina.projects.ProjectEnvironmentBuilder;
-import io.ballerina.projects.bala.BalaProject;
+import io.ballerina.projects.directory.ProjectLoader;
+import io.ballerina.projects.repos.FileSystemCache;
+import io.ballerina.runtime.api.PredefinedTypes;
+import io.ballerina.runtime.api.creators.TypeCreator;
 import io.ballerina.runtime.api.creators.ValueCreator;
+import io.ballerina.runtime.api.types.MapType;
+import io.ballerina.runtime.api.utils.JsonUtils;
 import io.ballerina.runtime.api.utils.StringUtils;
+import io.ballerina.runtime.api.utils.TypeUtils;
 import io.ballerina.runtime.api.values.BMap;
 import io.ballerina.runtime.api.values.BString;
 
@@ -43,19 +50,16 @@ import java.util.Optional;
 public class Compiler {
 
     private static void handleFunctionParam(ParameterSymbol parameterSymbol, String defaultParamName,
-                                            Documentation documentation,
-                                            BMap<BString, Object> properties) {
+                                            Documentation documentation, BMap<BString, Object> properties) {
         final BMap<BString, Object> property = ValueCreator.createMapValue();
         boolean optional = !(parameterSymbol.paramKind() == ParameterKind.REQUIRED);
         final BMap<BString, Object> metadata = ValueCreator.createMapValue();
 
         final String actualParamName = parameterSymbol.getName().orElse(null);
-        final BString paramName = StringUtils.fromString(
-                Optional.ofNullable(actualParamName).orElse(defaultParamName));
+        final BString paramName = StringUtils.fromString(Optional.ofNullable(actualParamName).orElse(defaultParamName));
         metadata.put(StringUtils.fromString("label"), paramName);
-        final String description =
-                documentation != null ? documentation.parameterMap().getOrDefault(actualParamName,
-                                                                                  "") : "";
+        final String description = documentation != null ? documentation.parameterMap().getOrDefault(actualParamName,
+                                                                                                     "") : "";
         metadata.put(StringUtils.fromString("description"), StringUtils.fromString(description));
         property.put(StringUtils.fromString("metadata"), metadata);
         property.put(StringUtils.fromString("valueType"), StringUtils.fromString("expression"));
@@ -68,14 +72,19 @@ public class Compiler {
         properties.put(paramName, property);
     }
 
-    public BMap<BString, Object> getPublicSymbols(String path) {
-        final Path balaPath = Paths.get(path);
-        final ProjectEnvironmentBuilder defaultBuilder = ProjectEnvironmentBuilder.getDefaultBuilder();
-        final BalaProject balaProject = BalaProject.loadProject(defaultBuilder, balaPath);
+    public static BMap<BString, Object> buildBala(BString path) {
+        final String ballerinaHomeKey = "ballerina.home";
+        Path balaPath = Paths.get(path.toString());
+        Path jBalToolsPath = Paths.get("/Library/Ballerina/distributions/ballerina-2201.9.0/");
+        Path repo = jBalToolsPath.resolve("repo");
+        System.setProperty(ballerinaHomeKey, repo.getParent().toString());
+        ProjectEnvironmentBuilder defaultBuilder = ProjectEnvironmentBuilder.getDefaultBuilder();
+        defaultBuilder.addCompilationCacheFactory(new FileSystemCache.FileSystemCacheFactory(repo.resolve("cache")));
+        Project balaProject = ProjectLoader.loadProject(balaPath, defaultBuilder);
         Package currentPackage = balaProject.currentPackage();
         final PackageCompilation compilation = currentPackage.getCompilation();
-
-        final BMap<BString, Object> functions = ValueCreator.createMapValue();
+        final MapType mapType = TypeCreator.createMapType(PredefinedTypes.TYPE_JSON);
+        final BMap<BString, Object> functions = ValueCreator.createMapValue(mapType);
 
         for (ModuleId moduleId : currentPackage.moduleIds()) {
             SemanticModel semanticModel = compilation.getSemanticModel(moduleId);
@@ -85,10 +94,10 @@ public class Compiler {
 
                     final FunctionSymbol funcSymbol = (FunctionSymbol) symbol;
                     funcSymbol.getName().ifPresent(functionName -> {
-                        final BMap<BString, Object> function = ValueCreator.createMapValue();
+                        final BMap<BString, Object> function = ValueCreator.createMapValue(mapType);
 
                         final FunctionTypeSymbol functionTypeSymbol = funcSymbol.typeDescriptor();
-                        final BMap<BString, Object> properties = ValueCreator.createMapValue();
+                        final BMap<BString, Object> properties = ValueCreator.createMapValue(mapType);
 
                         final Documentation documentation = funcSymbol.documentation().orElse(null);
                         functionTypeSymbol.params().ifPresent(params -> {
@@ -102,13 +111,12 @@ public class Compiler {
                             handleFunctionParam(parameterSymbol, "restParam", documentation, properties);
                         });
 
-                        final BMap<BString, Object> metadata = ValueCreator.createMapValue();
+                        final BMap<BString, Object> metadata = ValueCreator.createMapValue(mapType);
                         metadata.put(StringUtils.fromString("label"), StringUtils.fromString(functionName));
-                        metadata.put(StringUtils.fromString("description"),
-                                     StringUtils.fromString(
-                                             documentation != null ? documentation.description().orElse("") : ""));
+                        metadata.put(StringUtils.fromString("description"), StringUtils.fromString(
+                                documentation != null ? documentation.description().orElse("") : ""));
 
-                        final BMap<BString, Object> codeData = ValueCreator.createMapValue();
+                        final BMap<BString, Object> codeData = ValueCreator.createMapValue(mapType);
                         codeData.put(StringUtils.fromString("node"), StringUtils.fromString("FUNCTION_CALL"));
                         codeData.put(StringUtils.fromString("module"), StringUtils.fromString(currentPackage.module(
                                 moduleId).moduleName().toString()));
@@ -124,6 +132,7 @@ public class Compiler {
                 }
             }
         }
+        JsonUtils.convertJSON(functions, TypeUtils.fromString("json"));
         return functions;
     }
 }

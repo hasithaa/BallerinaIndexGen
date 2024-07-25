@@ -59,6 +59,12 @@ allprojects {
     }
 }
 
+subprojects {
+
+    configurations {
+        ballerinaStdLibs
+    }
+}
 
 task build {
 }

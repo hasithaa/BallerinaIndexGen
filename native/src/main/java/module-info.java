@@ -20,6 +20,5 @@ module io.ballerina.lib.compiler.api {
     requires io.ballerina.lang;
     requires io.ballerina.runtime;
     requires io.ballerina.tools.api;
-    requires io.ballerina.parser;
     exports io.ballerina.lib.compiler.api;
 }

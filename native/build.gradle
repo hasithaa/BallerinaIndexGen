@@ -22,7 +22,12 @@ plugins {
     id 'com.github.spotbugs'
 }
 
-description = 'Ballerina - Compiler APIs'
+description = 'Ballerina - Compiler APIs Native'
+
+repositories {
+    mavenCentral()
+}
+
 
 dependencies {
     implementation 'junit:junit:4.13.1'
@@ -33,7 +38,9 @@ dependencies {
     implementation group: 'org.ballerinalang', name: 'ballerina-lang', version: "${ballerinaLangVersion}"
     implementation group: 'org.ballerinalang', name: 'ballerina-runtime', version: "${ballerinaLangVersion}"
     implementation group: 'org.ballerinalang', name: 'ballerina-tools-api', version: "${ballerinaLangVersion}"
-    implementation group: 'org.ballerinalang', name: 'ballerina-parser', version: "${ballerinaLangVersion}"
+    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.github.zafarkhaja:java-semver:0.9.0'
+
 }
 
 checkstyle {

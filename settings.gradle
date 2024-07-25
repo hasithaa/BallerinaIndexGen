@@ -43,10 +43,11 @@ plugins {
 rootProject.name = 'compiler.api'
 include(':checkstyle')
 include(':native')
+include(':ballerina')
 
 project(':checkstyle').projectDir = file("build-config${File.separator}checkstyle")
 project(':native').projectDir = file('native')
-
+project(':ballerina').projectDir = file('ballerina')
 
 gradleEnterprise {
     buildScan {
