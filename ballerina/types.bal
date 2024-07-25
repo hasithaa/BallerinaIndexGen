@@ -9,9 +9,7 @@ type PackagesItem record {|
     string name;
     string version;
     string URL;
-    string balaVersion;
     string balaURL;
-    string digest;
     boolean template;
     string[] keywords;
     string ballerinaVersion;
@@ -19,9 +17,9 @@ type PackagesItem record {|
     ModulesItem[] modules;
 |};
 
-type GetPackages record {
+type GetPackagesResponse record {|
     PackagesItem[] packages;
     int count;
     int 'limit;
     int offset;
-};
+|};
