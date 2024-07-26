@@ -1,4 +1,4 @@
-type ModulesItem record {|
+type RegModulesItem record {|
     string name;
     string summary;
     string apiDocURL;
@@ -14,7 +14,7 @@ type PackagesItem record {|
     string[] keywords;
     string ballerinaVersion;
     int createdDate;
-    ModulesItem[] modules;
+    RegModulesItem[] modules;
 |};
 
 type GetPackagesResponse record {|
