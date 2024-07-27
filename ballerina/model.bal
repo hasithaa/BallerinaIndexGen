@@ -57,14 +57,14 @@ type Metadata record {|
 |};
 
 type FlowNode record {
-    Metadata metadata;
+    IndexMetadata metadata;
     CodeData codedata;
     map<Property> properties;
     Branch[] branches;
 };
 
 type Property record {
-    Metadata metadata;
+    IndexMetadata metadata;
     string valueType;
     string value;
     boolean optional;
@@ -90,12 +90,12 @@ type Branch record {
 };
 
 type Category record {|
-    Metadata metadata;
+    IndexMetadata metadata;
     Category[]|AvailableNode[] items?;
 |};
 
 type AvailableNode record {|
-    Metadata metadata;
+    IndexMetadata metadata;
     CodeData codedata;
     boolean enabled;
 |};

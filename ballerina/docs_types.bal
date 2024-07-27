@@ -9,7 +9,7 @@ type Constraint record {|
     boolean isTypeDesc;
     boolean isRestParam;
     boolean isDeprecated;
-    boolean isPublic;
+    boolean isPublic?;
     boolean generateUserDefinedTypeLink;
     MemberTypesItem[] memberTypes;
     int arrayDimensions;
@@ -31,7 +31,7 @@ type ElementType record {|
     boolean isTypeDesc;
     boolean isRestParam;
     boolean isDeprecated;
-    boolean isPublic;
+    boolean isPublic?;
     boolean generateUserDefinedTypeLink;
     MemberTypesItem[] memberTypes;
     int arrayDimensions;
@@ -56,7 +56,7 @@ type MemberTypesItem record {|
     boolean isTypeDesc;
     boolean isRestParam;
     boolean isDeprecated;
-    boolean isPublic;
+    boolean isPublic?;
     boolean generateUserDefinedTypeLink;
     MemberTypesItem[] memberTypes;
     int arrayDimensions;
@@ -81,7 +81,7 @@ type Type record {|
     boolean isTypeDesc;
     boolean isRestParam;
     boolean isDeprecated;
-    boolean isPublic;
+    boolean isPublic?;
     boolean generateUserDefinedTypeLink;
     MemberTypesItem[] memberTypes;
     int arrayDimensions;
@@ -109,7 +109,7 @@ type ParamTypesItem record {|
     boolean isTypeDesc;
     boolean isRestParam;
     boolean isDeprecated;
-    boolean isPublic;
+    boolean isPublic?;
     boolean generateUserDefinedTypeLink;
     anydata[] memberTypes;
     int arrayDimensions;
@@ -127,15 +127,15 @@ type ReturnType record {|
     boolean isTypeDesc;
     boolean isRestParam;
     boolean isDeprecated;
-    boolean isPublic;
+    boolean isPublic?;
     boolean generateUserDefinedTypeLink;
     MemberTypesItem[] memberTypes;
     int arrayDimensions;
 |};
 
 type FunctionTypesItem record {|
-    string accessor;
-    string resourcePath;
+    string accessor?;
+    string resourcePath?;
     boolean isLambda;
     boolean isIsolated;
     boolean isExtern;
@@ -155,7 +155,7 @@ type FunctionTypesItem record {|
     boolean isTypeDesc;
     boolean isRestParam;
     boolean isDeprecated;
-    boolean isPublic;
+    boolean isPublic?;
     boolean generateUserDefinedTypeLink;
     anydata[] memberTypes;
     int arrayDimensions;
@@ -177,7 +177,7 @@ type InclusionType record {|
     boolean isTypeDesc;
     boolean isRestParam;
     boolean isDeprecated;
-    boolean isPublic;
+    boolean isPublic?;
     boolean generateUserDefinedTypeLink;
     MemberTypesItem[] memberTypes;
     int arrayDimensions;
@@ -240,11 +240,11 @@ type ReturnParametersItem record {|
 |};
 
 type LifeCycleMethodsItem record {|
-    string accessor;
+    string accessor?;
     string resourcePath;
     boolean isIsolated;
-    boolean isRemote;
-    boolean isResource;
+    boolean isRemote?;
+    boolean isResource?;
     boolean isExtern;
     ParametersItem[] parameters;
     ReturnParametersItem[] returnParameters;
@@ -257,11 +257,11 @@ type LifeCycleMethodsItem record {|
 |};
 
 type MethodsItem record {|
-    string accessor;
-    string resourcePath;
+    string accessor?;
+    string resourcePath?;
     boolean isIsolated;
-    boolean isRemote;
-    boolean isResource;
+    boolean isRemote?;
+    boolean isResource?;
     boolean isExtern;
     ParametersItem[] parameters;
     ReturnParametersItem[] returnParameters;
@@ -274,11 +274,11 @@ type MethodsItem record {|
 |};
 
 type InitMethod record {|
-    string accessor;
-    string resourcePath;
+    string accessor?;
+    string resourcePath?;
     boolean isIsolated;
-    boolean isRemote;
-    boolean isResource;
+    boolean isRemote?;
+    boolean isResource?;
     boolean isExtern;
     ParametersItem[] parameters;
     ReturnParametersItem[] returnParameters;
@@ -291,11 +291,11 @@ type InitMethod record {|
 |};
 
 type OtherMethodsItem record {|
-    string accessor;
-    string resourcePath;
+    string accessor?;
+    string resourcePath?;
     boolean isIsolated;
-    boolean isRemote;
-    boolean isResource;
+    boolean isRemote?;
+    boolean isResource?;
     boolean isExtern;
     ParametersItem[] parameters;
     ReturnParametersItem[] returnParameters;
@@ -394,7 +394,7 @@ type DetailType record {|
     boolean isTypeDesc;
     boolean isRestParam;
     boolean isDeprecated;
-    boolean isPublic;
+    boolean isPublic?;
     boolean generateUserDefinedTypeLink;
     anydata[] memberTypes;
     int arrayDimensions;
@@ -427,7 +427,7 @@ type UnionTypesItem record {|
     boolean isTypeDesc;
     boolean isRestParam;
     boolean isDeprecated;
-    boolean isPublic;
+    boolean isPublic?;
     boolean generateUserDefinedTypeLink;
     MemberTypesItem[] memberTypes;
     int arrayDimensions;
@@ -474,7 +474,7 @@ type ModulesItem record {|
     ClassesItem[] classes?;
     ObjectTypesItem[] objectTypes?;
     ServiceTypesItem[] serviceTypes?;
-    anydata[] clients?;
+    ClientItem[] clients?;
     ListenersItem[] listeners?;
     FunctionsItem[] functions?;
     anydata[] constants?;
@@ -518,7 +518,7 @@ type SearchData record {|
     anydata[] constants;
     ErrorsItem[] errors;
     anydata[] types;
-    anydata[] clients;
+    ClientItem[] clients;
     ListenersItem[] listeners;
     anydata[] annotations;
     ObjectTypesItem[] objectTypes;
@@ -530,3 +530,39 @@ type DocsResponse record {|
     DocsData docsData;
     SearchData searchData;
 |};
+
+
+type RemoteMethodsItem record {
+    string accessor?;
+    string resourcePath?;
+    boolean isIsolated;
+    boolean isRemote?;
+    boolean isResource?;
+    boolean isExtern;
+    ParametersItem[] parameters;
+    ReturnParametersItem[] returnParameters;
+    anydata[] annotationAttachments?;
+    string name;
+    string description;
+    anydata[] descriptionSections?;
+    boolean isDeprecated?;
+    boolean isReadOnly;
+};
+
+
+type ClientItem record {
+    RemoteMethodsItem[] remoteMethods?;
+    anydata[] resourceMethods?;
+    FieldsItem[] fields?;
+    MethodsItem initMethod?;
+    MethodsItem[] methods?;
+    OtherMethodsItem[] otherMethods?;
+    boolean isIsolated?;
+    boolean isService?;
+    string name?;
+    string description?;
+    anydata[] descriptionSections?;
+    boolean isDeprecated?;
+    boolean isReadOnly?;
+    string id?;
+};
