@@ -10,13 +10,14 @@ const ORG_BALLERINAX = "ballerinax";
 const ORG_WSO2 = "wso2";
 
 const PATH_SOURCES = "../sources/";
+const PATH_INDEX = "../index/";
 const EXT_JSON = ".json";
 
 public function main() returns error? {
 
     // check fetachAllOrgs();
     // check fetchAllDocs();
-    // check buildKeyowrdIndex([ORG_BALLERINA, ORG_BALLERINAX, ORG_WSO2]);
+    check buildKeyowrdIndex([ORG_BALLERINA, ORG_BALLERINAX, ORG_WSO2]);
     check buildConnectionIndex();
 
 }
@@ -41,8 +42,8 @@ function buildConnectionIndex() returns error? {
             }
         }
     }
-    check io:fileWriteJson(PATH_SOURCES + "connections.json", connections);
-    check io:fileWriteJson(PATH_SOURCES + "nodeTemplates.json", nodeTemplates);
+    check io:fileWriteJson(PATH_INDEX + "connections.json", connections);
+    check io:fileWriteJson(PATH_INDEX + "nodeTemplates.json", nodeTemplates);
 }
 
 function deriveConnectionData([string, string, string] ref, string label, DocTable cache) returns [IndexCategory, IndexNodeTemplate[]]|error {
@@ -68,6 +69,11 @@ function deriveConnectionData([string, string, string] ref, string label, DocTab
     [IndexNode, IndexNodeTemplate] [initNode, initTemplate] = check handleInitMethod(ref, connection);
     indexCategory.items.push(initNode);
     nodeTemplates.push(initTemplate);
+
+    // JBallerina Bug. LHS type is not parsed correctly. Hence using var.
+    var [nodes, templates] = check handleRemoteMethods(ref, connection);
+    indexCategory.items.push(...nodes);
+    nodeTemplates.push(...templates);
     return [indexCategory, nodeTemplates];
 }
 
@@ -94,27 +100,28 @@ function handleInitMethod([string, string, string] ref, ClientItem connection) r
     properties["scope"] = {
         metadata: {label: "Connection Scope", description: "Scope of the connection, Global or Local"},
         valueType: "Enum",
-        value : "Global",
+        value: "Global",
         optional: false,
         editable: false,
-        valueTypeConstraints: { 'enum :["Global", "Local"] },
+        valueTypeConstraints: {'enum: ["Global", "Local"]},
         'order: 0
     };
-     properties["variable"] = {
+    properties["variable"] = {
         metadata: {label: "Variable", description: "Variable to store the connection"},
         valueType: "Identifier",
-        value: "connection{connectionIndex}",
+        value: "connection",
         optional: false,
         editable: true,
-        'order: 1
+        'order: 1,
+        valueTypeConstraints: {identifier: {isExistingVariable: false, isNewVariable: true}}
     };
-     properties["type"] = {
+    properties["type"] = {
         metadata: {label: "Type", description: "Type of the connection"},
         value: prefix + ":" + ref[2],
         valueType: "Type",
         optional: false,
         editable: false,
-        valueTypeConstraints: { "fixed" : prefix + ":" + ref[2] },
+        valueTypeConstraints: {'type: {"value": prefix + ":" + ref[2]}},
         'order: 2
     };
 
@@ -131,21 +138,86 @@ function handleInitMethod([string, string, string] ref, ClientItem connection) r
     }
     if init !is () {
         // Add method parameters as properties
-        handleFunctionParameters(init, properties, false);
+        handleMethodParameters(init, properties, false);
     }
 
     // TODO: Check init contains errors. Use category field. Following is a temporary fix. 
-    initTemplate.flags = initTemplate.flags | 1;
-    if initTemplate.codedata.hasKey("flags") {
-        initTemplate.codedata["flags"] = <int>initTemplate.codedata["flags"] | 1;
-    } else {
-        initTemplate.codedata["flags"] = 1;
-    }
-
+    setCheckedFlag(initTemplate);
     return [initNode, initTemplate];
 }
 
-function handleFunctionParameters(MethodsItem method, map<IndexProperty> properties, boolean handleReturn = true) {
+function handleRemoteMethods([string, string, string] ref, ClientItem connection) returns [IndexNode[], IndexNodeTemplate[]] {
+    IndexNode[] nodes = [];
+    IndexNodeTemplate[] templates = [];
+    RemoteMethodsItem[] methods = connection.remoteMethods ?: [];
+    foreach RemoteMethodsItem method in methods {
+        IndexNode node = {
+            metadata: {label: method.name, description: method.description},
+            codedata: {node: "ACTION_CALL", module: ref[1], symbol: method.name, org: ref[0], 'object: ref[2]},
+            enabled: true
+        };
+        IndexNodeTemplate template = {
+            metadata: node.metadata,
+            codedata: node.codedata,
+            properties: {},
+            flags: 0
+        };
+        string prefix = ref[1];
+        if ref[1].includes(".") {
+            prefix = ref[1].substring(<int>ref[1].lastIndexOf(".") + 1);
+        }
+        template.codedata["importStmt"] = "import " + ref[0] + "/" + ref[1] + " as " + prefix;
+
+        map<IndexProperty> properties = {};
+        template.properties = properties;
+        properties["connection"] = {
+            metadata: {label: "Connection", description: "Connection to use"},
+            valueType: "Identifier",
+            value: "connection",
+            optional: false,
+            editable: true,
+            'order: 0,
+            valueTypeConstraints: {'type: {typeOf: prefix + ":" + ref[2]}, identifier: {isExistingVariable: true, isNewVariable: false}}
+        };
+
+        properties["variable"] = {
+            metadata: {label: "Variable", description: "Variable to store the connection"},
+            valueType: "Identifier",
+            value: "res",
+            optional: false,
+            editable: true,
+            'order: 1,
+            valueTypeConstraints: {identifier: {isExistingVariable: false, isNewVariable: true}}
+        };
+        // We fix this later when we have the return type of the remote method
+        properties["type"] = {
+            metadata: {label: "Type", description: "Type of the result"},
+            value: "", // Fixed with return type
+            valueType: "Type",
+            optional: false,
+            editable: false,
+            'order: 2
+        };
+        handleRemoteMethodParameters(method, properties);
+
+        // TODO: Check init contains errors. Use category field. Following is a temporary fix. 
+        setCheckedFlag(template);
+        nodes.push(node);
+        templates.push(template);
+    }
+    return [nodes, templates];
+}
+
+function setCheckedFlag(IndexNodeTemplate template) {
+    template.flags = template.flags | 1;
+    if template.codedata.hasKey("flags") {
+        template.codedata["flags"] = <int>template.codedata["flags"] | 1;
+    } else {
+        template.codedata["flags"] = 1;
+    }
+}
+
+function handleMethodParameters(MethodsItem method, map<IndexProperty> properties, boolean handleReturn = true) {
     Type? dependentlyTyped = ();
     foreach ParametersItem item in method.parameters {
         if handleReturn && item.defaultValue == "<>" {
@@ -155,12 +227,63 @@ function handleFunctionParameters(MethodsItem method, map<IndexProperty> propert
         properties[item.name] = {
             metadata: {label: item.name, description: item.description},
             valueType: "Expression",
-            value: item.defaultValue ,
+            value: item.defaultValue,
             optional: item.defaultValue != "" && item.defaultValue != "<>",
             editable: true,
-            valueTypeConstraints: { 'type: item.'type.toJson() },
+            valueTypeConstraints: {'type: item.'type.toJson()},
             'order: properties.length()
-        };   
+        };
+    }
+    // TODO: Handle return type
+}
+
+function handleRemoteMethodParameters(RemoteMethodsItem method, map<IndexProperty> properties, boolean handleReturn = true) {
+    Type? dependentlyTyped = ();
+    foreach ParametersItem item in method.parameters {
+        if handleReturn && item.defaultValue == "<>" {
+            // This is dependently Typed function
+            dependentlyTyped = item.'type;
+        }
+        properties[item.name] = {
+            metadata: {label: item.name, description: item.description},
+            valueType: "Expression",
+            value: item.defaultValue,
+            optional: item.defaultValue != "" && item.defaultValue != "<>",
+            editable: true,
+            valueTypeConstraints: {'type: item.'type.toJson()},
+            'order: properties.length()
+        };
+    }
+    if method.returnParameters.length() > 0 {
+        // TODO: Improve. We fix this later. Assume dependently typed allways used if present.
+        // Also we assume checked is always present, so we ignore errors.
+        IndexProperty typeProperty = <IndexProperty>properties["type"];
+
+        ReturnParametersItem returnParametersItem = method.returnParameters[0];
+        if dependentlyTyped !is () {
+            if dependentlyTyped.category == "types" {
+                // This is refering to a Type definition (80% case) and we need to get the type from semantic model.
+                // As a temporary fix we assume the type is a json object..
+                typeProperty.value = "map<json>"; // Ideally we need a built in type called JSON objects. 
+            } else {
+                typeProperty.value = dependentlyTyped.name ?: "json";
+            }
+        } else {
+            // Improve this logic for union and others. 
+            if returnParametersItem.'type.memberTypes.length() > 0 {
+                // This is a union type. Get the first non-error type for now. 
+                // TODO: Improve this logic
+                foreach var item in returnParametersItem.'type.memberTypes {
+                    if item.category != "errors" {
+                        typeProperty.value = item.name ?: "json";
+                        break;
+                    }
+                }
+            } else {
+                typeProperty.value = returnParametersItem.'type.name ?: "json";
+            }
+            typeProperty.valueTypeConstraints = {'type: returnParametersItem.'type.toJson()};
+        }
     }
 }
 
@@ -200,9 +323,9 @@ function buildKeyowrdIndex(string[] orgs) returns error? {
             }
         }
     }
-    check io:fileWriteJson(PATH_SOURCES + "keywords/function.json", sortKeys(functionKeywordIndex));
-    check io:fileWriteJson(PATH_SOURCES + "keywords/client.json", sortKeys(clientKeywordIndex));
-    check io:fileWriteJson(PATH_SOURCES + "keywords/listener.json", sortKeys(listenerKeywordIndex));
+    check io:fileWriteJson(PATH_INDEX + "keywords/function.json", sortKeys(functionKeywordIndex));
+    check io:fileWriteJson(PATH_INDEX + "keywords/client.json", sortKeys(clientKeywordIndex));
+    check io:fileWriteJson(PATH_INDEX + "keywords/listener.json", sortKeys(listenerKeywordIndex));
 }
 
 function sortKeys(map<json> data) returns map<json> {
