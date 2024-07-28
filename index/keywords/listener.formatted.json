@@ -1,0 +1,1131 @@
+{
+    "Business Management/ERP": [
+        {
+            "org": "ballerinax",
+            "module": "sap.jco",
+            "version": "0.1.4",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Commerce/eCommerce": [
+        {
+            "org": "ballerinax",
+            "module": "trigger.shopify",
+            "version": "1.4.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Communication chat/voice": [
+        {
+            "org": "ballerinax",
+            "module": "trigger.twilio",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Communication/Team Chat": [
+        {
+            "org": "ballerinax",
+            "module": "trigger.github",
+            "version": "0.9.2",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.slack",
+            "version": "0.8.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.google.sheets",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.google.drive",
+            "version": "0.10.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Cost/Freemium": [
+        {
+            "org": "ballerinax",
+            "module": "trigger.salesforce",
+            "version": "0.10.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "twitter.listener",
+            "version": "3.3.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.github",
+            "version": "0.9.2",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.slack",
+            "version": "0.8.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.google.sheets",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.google.drive",
+            "version": "0.10.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.asgardeo",
+            "version": "0.7.2",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.google.mail",
+            "version": "0.10.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.google.calendar",
+            "version": "0.11.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.twilio",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.hubspot",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Cost/Paid": [
+        {
+            "org": "ballerinax",
+            "module": "asb",
+            "version": "3.8.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.asb",
+            "version": "1.2.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.aayu.mftg.as2",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.shopify",
+            "version": "1.4.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.quickbooks",
+            "version": "1.2.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "sap.jco",
+            "version": "0.1.4",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "FHIR": [
+        {
+            "org": "ballerinax",
+            "module": "health.fhirr4",
+            "version": "1.3.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "FTP": [
+        {
+            "org": "ballerina",
+            "module": "ftp",
+            "version": "2.10.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Finance/Accounting": [
+        {
+            "org": "ballerinax",
+            "module": "trigger.quickbooks",
+            "version": "1.2.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Healthcare": [
+        {
+            "org": "ballerinax",
+            "module": "health.fhirr4",
+            "version": "1.3.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "IMAP": [
+        {
+            "org": "ballerina",
+            "module": "email",
+            "version": "2.9.0",
+            "ids": [
+                "ImapListener",
+                "PopListener"
+            ]
+        }
+    ],
+    "IT Operations/Authentication": [
+        {
+            "org": "ballerinax",
+            "module": "trigger.asgardeo",
+            "version": "0.7.2",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "IT Operations/Gateway": [
+        {
+            "org": "ballerinax",
+            "module": "trigger.aayu.mftg.as2",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "IT Operations/Message Brokers": [
+        {
+            "org": "ballerinax",
+            "module": "asb",
+            "version": "3.8.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.asb",
+            "version": "1.2.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Marketing/Social Media Accounts": [
+        {
+            "org": "ballerinax",
+            "module": "twitter.listener",
+            "version": "3.3.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "POP": [
+        {
+            "org": "ballerina",
+            "module": "email",
+            "version": "2.9.0",
+            "ids": [
+                "ImapListener",
+                "PopListener"
+            ]
+        }
+    ],
+    "POP3": [
+        {
+            "org": "ballerina",
+            "module": "email",
+            "version": "2.9.0",
+            "ids": [
+                "ImapListener",
+                "PopListener"
+            ]
+        }
+    ],
+    "R4": [
+        {
+            "org": "ballerinax",
+            "module": "health.fhirr4",
+            "version": "1.3.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "SFTP": [
+        {
+            "org": "ballerina",
+            "module": "ftp",
+            "version": "2.10.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "SMTP": [
+        {
+            "org": "ballerina",
+            "module": "email",
+            "version": "2.9.0",
+            "ids": [
+                "ImapListener",
+                "PopListener"
+            ]
+        }
+    ],
+    "Sales & CRM/Customer Relationship Management": [
+        {
+            "org": "ballerinax",
+            "module": "trigger.salesforce",
+            "version": "0.10.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.hubspot",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Trigger": [
+        {
+            "org": "ballerinax",
+            "module": "trigger.github",
+            "version": "0.9.2",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.google.sheets",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.google.drive",
+            "version": "0.10.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.google.mail",
+            "version": "0.10.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.google.calendar",
+            "version": "0.11.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.aayu.mftg.as2",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.shopify",
+            "version": "1.4.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.hubspot",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.quickbooks",
+            "version": "1.2.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "UDP": [
+        {
+            "org": "ballerina",
+            "module": "udp",
+            "version": "1.10.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Vendor/Microsoft": [
+        {
+            "org": "ballerinax",
+            "module": "asb",
+            "version": "3.8.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "trigger.asb",
+            "version": "1.2.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Vendor/SAP": [
+        {
+            "org": "ballerinax",
+            "module": "sap.jco",
+            "version": "0.1.4",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "Vendor/Twilio": [
+        {
+            "org": "ballerinax",
+            "module": "trigger.twilio",
+            "version": "0.9.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "bi-directional": [
+        {
+            "org": "ballerina",
+            "module": "websocket",
+            "version": "2.11.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "bidirectional-streaming": [
+        {
+            "org": "ballerina",
+            "module": "grpc",
+            "version": "1.11.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "client": [
+        {
+            "org": "ballerina",
+            "module": "http",
+            "version": "2.11.3",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "websocket",
+            "version": "2.11.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "websubhub",
+            "version": "1.11.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "tcp",
+            "version": "1.10.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "ftp",
+            "version": "2.10.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "mqtt",
+            "version": "1.1.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "rabbitmq",
+            "version": "3.0.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "nats",
+            "version": "3.0.0",
+            "ids": [
+                "JetStreamListener",
+                "Listener"
+            ]
+        }
+    ],
+    "client-streaming": [
+        {
+            "org": "ballerina",
+            "module": "grpc",
+            "version": "1.11.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "datagram": [
+        {
+            "org": "ballerina",
+            "module": "udp",
+            "version": "1.10.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "directory": [
+        {
+            "org": "ballerina",
+            "module": "file",
+            "version": "1.9.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "email": [
+        {
+            "org": "ballerina",
+            "module": "email",
+            "version": "2.9.0",
+            "ids": [
+                "ImapListener",
+                "PopListener"
+            ]
+        }
+    ],
+    "event streaming": [
+        {
+            "org": "ballerinax",
+            "module": "kafka",
+            "version": "4.1.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "file": [
+        {
+            "org": "ballerina",
+            "module": "file",
+            "version": "1.9.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "file transfer": [
+        {
+            "org": "ballerina",
+            "module": "ftp",
+            "version": "2.10.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "filepath": [
+        {
+            "org": "ballerina",
+            "module": "file",
+            "version": "1.9.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "gql": [
+        {
+            "org": "ballerina",
+            "module": "graphql",
+            "version": "1.13.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "grpc": [
+        {
+            "org": "ballerina",
+            "module": "grpc",
+            "version": "1.11.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "http": [
+        {
+            "org": "ballerina",
+            "module": "http",
+            "version": "2.11.3",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "hub": [
+        {
+            "org": "ballerina",
+            "module": "websubhub",
+            "version": "1.11.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "iot": [
+        {
+            "org": "ballerina",
+            "module": "mqtt",
+            "version": "1.1.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "jms": [
+        {
+            "org": "ballerinax",
+            "module": "java.jms",
+            "version": "1.0.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "kafka": [
+        {
+            "org": "ballerinax",
+            "module": "kafka",
+            "version": "4.1.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "listener": [
+        {
+            "org": "ballerina",
+            "module": "http",
+            "version": "2.11.3",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "websubhub",
+            "version": "1.11.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "websub",
+            "version": "2.11.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "mail": [
+        {
+            "org": "ballerina",
+            "module": "email",
+            "version": "2.9.0",
+            "ids": [
+                "ImapListener",
+                "PopListener"
+            ]
+        }
+    ],
+    "messaging": [
+        {
+            "org": "ballerina",
+            "module": "mqtt",
+            "version": "1.1.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "kafka",
+            "version": "4.1.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "rabbitmq",
+            "version": "3.0.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "nats",
+            "version": "3.0.0",
+            "ids": [
+                "JetStreamListener",
+                "Listener"
+            ]
+        }
+    ],
+    "mqtt": [
+        {
+            "org": "ballerina",
+            "module": "mqtt",
+            "version": "1.1.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "network": [
+        {
+            "org": "ballerina",
+            "module": "http",
+            "version": "2.11.3",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "websocket",
+            "version": "2.11.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "graphql",
+            "version": "1.13.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "grpc",
+            "version": "1.11.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "tcp",
+            "version": "1.10.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "mqtt",
+            "version": "1.1.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "kafka",
+            "version": "4.1.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "rabbitmq",
+            "version": "3.0.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "nats",
+            "version": "3.0.0",
+            "ids": [
+                "JetStreamListener",
+                "Listener"
+            ]
+        }
+    ],
+    "path": [
+        {
+            "org": "ballerina",
+            "module": "file",
+            "version": "1.9.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "protobuf": [
+        {
+            "org": "ballerina",
+            "module": "grpc",
+            "version": "1.11.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "publisher": [
+        {
+            "org": "ballerina",
+            "module": "websubhub",
+            "version": "1.11.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "pubsub": [
+        {
+            "org": "ballerina",
+            "module": "mqtt",
+            "version": "1.1.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "rabbitmq",
+            "version": "3.0.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "nats",
+            "version": "3.0.0",
+            "ids": [
+                "JetStreamListener",
+                "Listener"
+            ]
+        }
+    ],
+    "query": [
+        {
+            "org": "ballerina",
+            "module": "graphql",
+            "version": "1.13.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "remote file": [
+        {
+            "org": "ballerina",
+            "module": "ftp",
+            "version": "2.10.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "server-streaming": [
+        {
+            "org": "ballerina",
+            "module": "grpc",
+            "version": "1.11.1",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "service": [
+        {
+            "org": "ballerina",
+            "module": "http",
+            "version": "2.11.3",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "websocket",
+            "version": "2.11.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "graphql",
+            "version": "1.13.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "websubhub",
+            "version": "1.11.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "websub",
+            "version": "2.11.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "tcp",
+            "version": "1.10.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "ftp",
+            "version": "2.10.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "rabbitmq",
+            "version": "3.0.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "health.fhirr4",
+            "version": "1.3.1",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerinax",
+            "module": "nats",
+            "version": "3.0.0",
+            "ids": [
+                "JetStreamListener",
+                "Listener"
+            ]
+        }
+    ],
+    "socket": [
+        {
+            "org": "ballerina",
+            "module": "tcp",
+            "version": "1.10.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "streaming": [
+        {
+            "org": "ballerina",
+            "module": "websocket",
+            "version": "2.11.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "subscriber": [
+        {
+            "org": "ballerina",
+            "module": "websub",
+            "version": "2.11.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "transport": [
+        {
+            "org": "ballerina",
+            "module": "udp",
+            "version": "1.10.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "websub": [
+        {
+            "org": "ballerina",
+            "module": "websubhub",
+            "version": "1.11.0",
+            "ids": [
+                "Listener"
+            ]
+        },
+        {
+            "org": "ballerina",
+            "module": "websub",
+            "version": "2.11.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ],
+    "ws": [
+        {
+            "org": "ballerina",
+            "module": "websocket",
+            "version": "2.11.0",
+            "ids": [
+                "Listener"
+            ]
+        }
+    ]
+}
